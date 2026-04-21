@@ -1,0 +1,14 @@
+{
+  "$schema": "https://moddbcdn.vintagestory.at/schema/modinfo.latest.json",
+  "type": "Code",
+  "modid": "betternutrition",
+  "name": "BetterNutrition",
+  "authors": [
+    "Sir Fragalicious / Solas_Flemeth"
+  ],
+  "description": "Adds minors buffs and penalties to the food system. Warning is in early beta",
+  "version": "0.2.0",
+  "dependencies": {
+    "game": "1.21.6"
+  }
+}
