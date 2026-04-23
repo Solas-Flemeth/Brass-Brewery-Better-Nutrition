@@ -1,4 +1,5 @@
 ﻿
+
 using System;
 using HarmonyLib;
 using Vintagestory.API.Common;
@@ -9,20 +10,45 @@ namespace BetterNutrition;
 internal static class BehaviorHungerPatch
 {
     private static readonly BetterNutritionConfigData _config = BetterNutritionConfig.Config;
+
+    //credit to Xandu for referencing their Xskills code
     [HarmonyPostfix]
-    //"UpdateNutrientHealthBoost"
+    [HarmonyPatch(typeof(EntityBehaviorHunger), nameof(EntityBehaviorHunger.Initialize))]
+    public static void AfterInitialize(EntityBehaviorHunger __instance)
+    {
+        if (__instance.entity is EntityPlayer == false || _config.AdditionalSatietyBonus == 0f)
+        {
+            Console.WriteLine("No tweaking to hunger for");
+            return;
+        }
+        bool fullFood = __instance.Saturation == __instance.MaxSaturation;
+        __instance.MaxSaturation = 1500f + _config.AdditionalSatietyBonus;
+        if (fullFood)
+        {
+            __instance.Saturation = __instance.MaxSaturation;
+        }
+        float adjustedSaturation = (__instance.Saturation / 1500f) * __instance.MaxSaturation;
+        __instance.FruitLevel *= adjustedSaturation;
+        __instance.GrainLevel *= adjustedSaturation;
+        __instance.VegetableLevel *= adjustedSaturation;
+        __instance.ProteinLevel *= adjustedSaturation;
+        __instance.DairyLevel *= adjustedSaturation;
+        __instance.UpdateNutrientHealthBoost();
+    }
+    
+    
+    [HarmonyPostfix]
     [HarmonyPatch(typeof(EntityBehaviorHunger), nameof(EntityBehaviorHunger.UpdateNutrientHealthBoost) )]
     public static void AfterUpdateNutrientHealthBoost(EntityBehaviorHunger __instance)
     {
         if ( __instance.entity is not EntityPlayer player) return;
-        //credit to Xandu for referencing their Xskills code
         //prep math
         float fruitPercentage =  __instance.FruitLevel /  __instance.MaxSaturation;
         float grainPercentage =  __instance.GrainLevel /  __instance.MaxSaturation;   
         float vegetablePercentage =  __instance.VegetableLevel /  __instance.MaxSaturation;
         float proteinPercentage =  __instance.ProteinLevel /  __instance.MaxSaturation;
-        float dairyPercentage =  __instance.DairyLevel /  __instance.MaxSaturation; //hunger
-        float hungerPercentage =  __instance.Saturation /  __instance.MaxSaturation; //   
+        float dairyPercentage =  __instance.DairyLevel /  __instance.MaxSaturation;
+        float hungerPercentage =  __instance.Saturation /  __instance.MaxSaturation;  
         //starvation logic
         float starvationEffectiveness = 0f;
         bool isStarving = _config.MinimumFoodToStarve >= hungerPercentage;

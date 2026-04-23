@@ -6,9 +6,13 @@
   "authors": [
     "Sir Fragalicious / Solas_Flemeth"
   ],
-  "description": "Adds minors buffs and penalties to the food system. Warning is in early beta",
-  "version": "0.2.0",
+  "contributors": [
+    "Oculuce - Mod Icon"
+  ],
+  "description": "Adds minors buffs and penalties to the food system, and allows flexibility customizing food based mechanics",
+  "version": "1.0.1",
+  
   "dependencies": {
-    "game": "1.21.6"
+    "game": "1.22.0"
   }
 }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using HarmonyLib;
 using Vintagestory.API.Common;
 
 namespace BetterNutrition;
@@ -59,23 +61,23 @@ public class BetterNutritionConfigData
     public float StarvationHealth { get; set; } = -7.5f;
     //starvationMode
     public bool StarvationMode { get; set; } = true;
-    private float _minimumFoodToStarve =  0.5f;
+
     public float MinimumFoodToStarve
     {
-        get => _minimumFoodToStarve;
-        set => _minimumFoodToStarve = Math.Clamp(value, 0.0f, 1.0f);
-    }
-    //Misc
-    public bool OffHandHungerPenalty { get; set; } = true;
+        get;
+        set => field = Math.Clamp(value, 0.0f, 1.0f);
+    } = 0.5f;
 
-    public int MaxSatietyModifier { get; set; } = 0;
+    //Misc
+    public bool OffHandHungerPenalty { get; set; } = false;
     //public bool SittingReducesHunger { get; set; } = true;
     //public float SittingHungerReduction { get; set; } = -0.2f;
+    public float AdditionalSatietyBonus { get; set; } = 500f;
 }
 
 public class BetterNutritionConfig
 {
-    public static String CurrentConfigVersion { get; set; } = "0.1.0";
+    public static String CurrentConfigVersion { get; set; } = "0.2.1";
     public static BetterNutritionConfig Instance { get; set; } = new BetterNutritionConfig();
     public static BetterNutritionConfigData Config;
     //overall
@@ -84,7 +86,7 @@ public class BetterNutritionConfig
         try
         {
             Config = api.LoadModConfig<BetterNutritionConfigData>("BrassBrewery-BetterNutrition.json");
-            if (Config == null || Config.ConfigVersion != CurrentConfigVersion)
+            if (Config == null)
             {
                 Config = new BetterNutritionConfigData();
             }
@@ -98,4 +100,5 @@ public class BetterNutritionConfig
             Config = new BetterNutritionConfigData();
         }
     }
+
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <OutputPath>bin\$(Configuration)\Mods\mod</OutputPath>
         <Nullable>enable</Nullable>
@@ -48,6 +48,14 @@
             <HintPath>$(VINTAGE_STORY)/Lib/Microsoft.Data.Sqlite.dll</HintPath>
             <Private>False</Private>
         </Reference>
+        <Reference Include="xskills">
+            <HintPath>$(VINTAGE_STORY)/ModLibs/xskills/xskills.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
+        <Reference Include="xlib">
+            <HintPath>$(VINTAGE_STORY)/ModLibs/XLib/xlib.dll</HintPath>
+            <Private>False</Private>
+        </Reference>
     </ItemGroup>
 
     <ItemGroup>
@@ -60,6 +68,10 @@
         <Content Include="modicon.png" Condition="Exists('modicon.png')">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="assets\betternutrition\" />
     </ItemGroup>
 
 </Project>
