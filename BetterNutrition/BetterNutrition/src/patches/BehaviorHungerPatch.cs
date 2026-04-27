@@ -16,23 +16,20 @@ internal static class BehaviorHungerPatch
     [HarmonyPatch(typeof(EntityBehaviorHunger), nameof(EntityBehaviorHunger.Initialize))]
     public static void AfterInitialize(EntityBehaviorHunger __instance)
     {
-        if (__instance.entity is EntityPlayer == false || _config.AdditionalSatietyBonus == 0f)
+        if (__instance.entity is EntityPlayer == false || _config.AdditionalSatietyBonus == 0.0f)
         {
-            Console.WriteLine("No tweaking to hunger for");
             return;
         }
-        bool fullFood = __instance.Saturation == __instance.MaxSaturation;
         __instance.MaxSaturation = 1500f + _config.AdditionalSatietyBonus;
-        if (fullFood)
+        if (__instance.Saturation >= __instance.MaxSaturation)
         {
             __instance.Saturation = __instance.MaxSaturation;
         }
-        float adjustedSaturation = (__instance.Saturation / 1500f) * __instance.MaxSaturation;
-        __instance.FruitLevel *= adjustedSaturation;
-        __instance.GrainLevel *= adjustedSaturation;
-        __instance.VegetableLevel *= adjustedSaturation;
-        __instance.ProteinLevel *= adjustedSaturation;
-        __instance.DairyLevel *= adjustedSaturation;
+        __instance.FruitLevel = Math.Clamp(__instance.FruitLevel ,0f,  __instance.MaxSaturation);
+        __instance.GrainLevel = Math.Clamp(__instance.GrainLevel , 0f, __instance.MaxSaturation);
+        __instance.VegetableLevel = Math.Clamp(__instance.VegetableLevel, 0f, __instance.MaxSaturation);
+        __instance.ProteinLevel = Math.Clamp(__instance.ProteinLevel, 0f, __instance.MaxSaturation);
+        __instance.DairyLevel = Math.Clamp(__instance.DairyLevel, 0f, __instance.MaxSaturation);
         __instance.UpdateNutrientHealthBoost();
     }
     

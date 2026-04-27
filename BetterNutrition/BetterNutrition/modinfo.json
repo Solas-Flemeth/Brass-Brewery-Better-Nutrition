@@ -10,7 +10,7 @@
     "Oculuce - Mod Icon"
   ],
   "description": "Adds minors buffs and penalties to the food system, and allows flexibility customizing food based mechanics",
-  "version": "1.0.1",
+  "version": "1.0.4",
   
   "dependencies": {
     "game": "1.22.0"
