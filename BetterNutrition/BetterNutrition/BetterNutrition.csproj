@@ -48,14 +48,6 @@
             <HintPath>$(VINTAGE_STORY)/Lib/Microsoft.Data.Sqlite.dll</HintPath>
             <Private>False</Private>
         </Reference>
-        <Reference Include="xskills">
-            <HintPath>$(VINTAGE_STORY)/ModLibs/xskills/xskills.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
-        <Reference Include="xlib">
-            <HintPath>$(VINTAGE_STORY)/ModLibs/XLib/xlib.dll</HintPath>
-            <Private>False</Private>
-        </Reference>
     </ItemGroup>
 
     <ItemGroup>

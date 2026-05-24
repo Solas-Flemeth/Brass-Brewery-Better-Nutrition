@@ -73,11 +73,12 @@ public class BetterNutritionConfigData
     //public bool SittingReducesHunger { get; set; } = true;
     //public float SittingHungerReduction { get; set; } = -0.2f;
     public float AdditionalSatietyBonus { get; set; } = 500f;
+    public bool patchSaturationOnLogin { get; set; } = false;
 }
 
 public class BetterNutritionConfig
 {
-    public static String CurrentConfigVersion { get; set; } = "0.2.1";
+    public static String CurrentConfigVersion { get; set; } = "1.0.5";
     public static BetterNutritionConfig Instance { get; set; } = new BetterNutritionConfig();
     public static BetterNutritionConfigData Config;
     //overall

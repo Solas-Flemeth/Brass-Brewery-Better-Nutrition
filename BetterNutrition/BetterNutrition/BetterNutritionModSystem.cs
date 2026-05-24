@@ -9,7 +9,6 @@ namespace BetterNutrition;
 public class BetterNutritionModSystem : ModSystem
 {
     private Harmony? _harmony;
-    
     public override void Start(ICoreAPI api)
     {
         Mod.Logger.Notification("Loading Mod: " + Mod.Info.ModID);
@@ -20,7 +19,7 @@ public class BetterNutritionModSystem : ModSystem
         ApplyPatches(_harmony, api);
         Mod.Logger.Notification("Mod Loaded: " + Mod.Info.ModID);
     }
-
+    
     public override double ExecuteOrder()
     {
         return 0.5;
@@ -28,6 +27,8 @@ public class BetterNutritionModSystem : ModSystem
 
     public override void StartServerSide(ICoreServerAPI api)
     {
+        api.Event.PlayerCreate += UpdateBonusSatiety.OnPlayerCreate;
+        api.Event.PlayerJoin += UpdateBonusSatiety.OnPlayerJoin;
     }
 
     public override void StartClientSide(ICoreClientAPI api)
@@ -43,11 +44,12 @@ public class BetterNutritionModSystem : ModSystem
     {
         Mod.Logger.Notification("Patching Game");
         _harmony.PatchAll();
+        /*
         if (api.ModLoader.IsModEnabled("xskills") || api.ModLoader.IsModEnabled("xskillsfork"))
         {
             Mod.Logger.Notification("Mod XSkills Detect: Patching HugeStomach for compatibility");
-            XskillsPatch.Apply(harmony, api);
         }
+        */
         //future mod patches here
     }
 }
