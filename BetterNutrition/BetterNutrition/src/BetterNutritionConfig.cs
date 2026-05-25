@@ -18,6 +18,7 @@ public class BetterNutritionConfigData
     public float DairyWalkSpeed { get; set; } = 0.025f;
     public float BaseWalkSpeed { get; set; } = -0.1f;
     public float StarvationWalkSpeed { get; set; } = -0.2f;
+    public float xpMultiplier;
     
     //Hunger Rate
     public bool NutritionImpactsMiningSpeed { get; set; } = true;
@@ -59,9 +60,17 @@ public class BetterNutritionConfigData
     public float DairyHealth { get; set; } = 3f;
     public float BaseHealth { get; set; } = 0f;
     public float StarvationHealth { get; set; } = -7.5f;
+    
+    //xSkills XP Boost
+    public bool NutritionImpactsXSkillsXP { get; set; } = true;
+    public float FruitXSkillsXP { get; set; } = 0.06f;
+    public float GrainXSkillsXP { get; set; } = 0.06f;
+    public float VegetableXSkillsXP { get; set; } = 0.06f;
+    public float ProteinXSkillsXP { get; set; } = 0.06f;
+    public float DairyXSkillsXP { get; set; } = 0.06f;
+    
     //starvationMode
     public bool StarvationMode { get; set; } = true;
-
     public float MinimumFoodToStarve
     {
         get;
@@ -70,15 +79,14 @@ public class BetterNutritionConfigData
 
     //Misc
     public bool OffHandHungerPenalty { get; set; } = false;
-    //public bool SittingReducesHunger { get; set; } = true;
-    //public float SittingHungerReduction { get; set; } = -0.2f;
+
     public float AdditionalSatietyBonus { get; set; } = 500f;
     public bool patchSaturationOnLogin { get; set; } = false;
 }
 
 public class BetterNutritionConfig
 {
-    public static String CurrentConfigVersion { get; set; } = "1.0.5";
+    public static String CurrentConfigVersion { get; set; } = "1.1.0";
     public static BetterNutritionConfig Instance { get; set; } = new BetterNutritionConfig();
     public static BetterNutritionConfigData Config;
     //overall
@@ -95,7 +103,6 @@ public class BetterNutritionConfig
         }
         catch (Exception e)
         {
-            //Couldn't load the mod config... Create a new one with default settings, but don't save it.
             mod.Logger.Error("Could not load config 'BrassBrewery-BetterNutrition'! Loading default settings instead.");
             mod.Logger.Error(e);
             Config = new BetterNutritionConfigData();

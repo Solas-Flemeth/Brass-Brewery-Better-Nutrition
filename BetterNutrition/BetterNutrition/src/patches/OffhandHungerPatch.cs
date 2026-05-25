@@ -3,7 +3,7 @@ using HarmonyLib;
 using Vintagestory.API.Common;
 namespace BetterNutrition;
 
-[HarmonyPatchCategory("brassbrewerybetternutrition")]
+[HarmonyPatchCategory("brassbrewerybetternutrition.base")]
 internal static class OffhandHungerPatch
 {
     private static readonly BetterNutritionConfigData _config = BetterNutritionConfig.Config;

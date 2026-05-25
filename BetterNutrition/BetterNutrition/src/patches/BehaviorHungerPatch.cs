@@ -6,7 +6,7 @@ using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 namespace BetterNutrition;
 
-[HarmonyPatchCategory("brassbrewerybetternutrition")]
+[HarmonyPatchCategory("brassbrewerybetternutrition.base")]
 internal static class BehaviorHungerPatch
 {
     private static readonly BetterNutritionConfigData _config = BetterNutritionConfig.Config;
@@ -88,6 +88,16 @@ internal static class BehaviorHungerPatch
                                            + dairyPercentage * _config.DairyHealth 
                                            + proteinPercentage * _config.ProteinHealth;
             player.GetBehavior<EntityBehaviorHealth>()!.SetMaxHealthModifiers("nutrientHealthMod", healthOverrideModifier);
+        }
+        if (_config.NutritionImpactsXSkillsXP)
+        {
+            float expBoost = fruitPercentage * _config.FruitXSkillsXP 
+                             + grainPercentage * _config.GrainXSkillsXP
+                             + vegetablePercentage * _config.VegetableXSkillsXP 
+                             + dairyPercentage * _config.DairyXSkillsXP
+                             + proteinPercentage * _config.ProteinXSkillsXP;
+            //player.Attributes.SetFloat("BrassBreweryBetterNutritionPatch_XPBoost", expBoost);
+            player.Stats.Set("expMult", "betternutrition",expBoost, true);
         }
     }
 }

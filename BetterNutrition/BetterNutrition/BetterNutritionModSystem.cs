@@ -31,7 +31,7 @@ public class BetterNutritionModSystem : ModSystem
         api.Event.PlayerJoin += UpdateBonusSatiety.OnPlayerJoin;
     }
 
-    public override void StartClientSide(ICoreClientAPI api)
+    public override void StartClientSide(ICoreClientAPI api) 
     {
         
     }
@@ -43,11 +43,12 @@ public class BetterNutritionModSystem : ModSystem
     private void ApplyPatches(Harmony harmony, ICoreAPI api)
     {
         Mod.Logger.Notification("Patching Game");
-        _harmony.PatchAll();
+        _harmony.PatchCategory("brassbrewerybetternutrition.base");
         /*
-        if (api.ModLoader.IsModEnabled("xskills") || api.ModLoader.IsModEnabled("xskillsfork"))
+        if (api.ModLoader.IsModEnabled("xlib") || api.ModLoader.IsModEnabled("xlibfork"))
         {
-            Mod.Logger.Notification("Mod XSkills Detect: Patching HugeStomach for compatibility");
+            Mod.Logger.Notification("Mod XLib Detect: Patching XLib to allow XP bonus with XSkills");
+            harmony.PatchCategory("brassbrewerybetternutrition.xlib");
         }
         */
         //future mod patches here
