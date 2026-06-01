@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
@@ -9,15 +10,20 @@ namespace BetterNutrition;
 public class BetterNutritionModSystem : ModSystem
 {
     private Harmony? _harmony;
+    private static BetterNutritionModSystem? Instance { get; set; }
     public override void Start(ICoreAPI api)
     {
-        Mod.Logger.Notification("Loading Mod: " + Mod.Info.ModID);
+        Instance = this;
+        Log("Begin Loading");
         //load config
-        BetterNutritionConfig.LoadConfig(Mod, api);
+        if (!BetterNutritionConfig.IsLoaded)
+        {
+            BetterNutritionConfig.LoadConfig(Mod, api);
+        }
         //harmony patching
         _harmony = new Harmony(Mod.Info.ModID);
-        ApplyPatches(_harmony, api);
-        Mod.Logger.Notification("Mod Loaded: " + Mod.Info.ModID);
+        ApplyPatches(api);
+       Log("Finished Loading");
     }
     
     public override double ExecuteOrder()
@@ -27,8 +33,28 @@ public class BetterNutritionModSystem : ModSystem
 
     public override void StartServerSide(ICoreServerAPI api)
     {
-        api.Event.PlayerCreate += UpdateBonusSatiety.OnPlayerCreate;
-        api.Event.PlayerJoin += UpdateBonusSatiety.OnPlayerJoin;
+        if (!BetterNutritionConfig.IsLoaded)
+        {
+            BetterNutritionConfig.LoadConfig(Mod, api);
+        }
+        //Load Systems and listeners
+        if (BetterNutritionConfig.Config.Nutrition.Enable)
+        {
+            Log("Enabling Regeneration System");
+            NutritionSystem nutritionSystem = new NutritionSystem(api);
+            api.Event.RegisterGameTickListener(nutritionSystem.PlayerNutritionUpdateCheck, (int) (BetterNutritionConfig.Config.Nutrition.UpdateFrequency*1000f));
+        }
+
+        if (BetterNutritionConfig.Config.Regeneration.Enable)
+        {
+            Log("Enabling Regeneration System");
+            RegenerationSystem regenerationSystem = new RegenerationSystem(api);
+            api.Event.RegisterGameTickListener(regenerationSystem.OnTick, (int) (BetterNutritionConfig.Config.Regeneration.TickRate*1000f));
+        }
+        api.Event.PlayerJoin += BetterNutritionModSystem.OnPlayerJoin;
+        api.Event.PlayerLeave += BetterNutritionModSystem.OnPlayerLeave;
+        api.Event.PlayerRespawn += BetterNutritionModSystem.OnPlayerRespawn;
+
     }
 
     public override void StartClientSide(ICoreClientAPI api) 
@@ -40,17 +66,42 @@ public class BetterNutritionModSystem : ModSystem
         _harmony?.UnpatchAll(Mod.Info.ModID);
     }
     
-    private void ApplyPatches(Harmony harmony, ICoreAPI api)
+    private void ApplyPatches(ICoreAPI api)
     {
         Mod.Logger.Notification("Patching Game");
         _harmony.PatchCategory("brassbrewerybetternutrition.base");
-        /*
-        if (api.ModLoader.IsModEnabled("xlib") || api.ModLoader.IsModEnabled("xlibfork"))
-        {
-            Mod.Logger.Notification("Mod XLib Detect: Patching XLib to allow XP bonus with XSkills");
-            harmony.PatchCategory("brassbrewerybetternutrition.xlib");
-        }
-        */
+        IntegrationController.StartXSkillsIntegration(api);
+        IntegrationController.StartHydrateDydrate(api);
         //future mod patches here
+    }
+
+    public static void Log(String message)
+    {
+        Instance?.Mod.Logger.Notification(message);
+    }
+    
+    public static void OnPlayerJoin(IServerPlayer player)
+    {
+        SatietyBonusSystem.OnPlayerJoin(player);
+        if (BetterNutritionConfig.Config.Nutrition.Enable)
+        {
+            NutritionSystem.UpdateNutritionStats(player);
+        }
+    }
+
+    public static void OnPlayerLeave(IServerPlayer player)
+    {
+        if (BetterNutritionConfig.Config.Nutrition.Enable)
+        {
+            NutritionSystem.ResetPlayerStats(player);
+        }
+    }
+
+    public static void OnPlayerRespawn(IServerPlayer player)
+    {
+        if (BetterNutritionConfig.Config.Nutrition.Enable)
+        {
+            NutritionSystem.ResetPlayerStats(player);
+        }
     }
 }

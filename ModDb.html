@@ -1,0 +1,373 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BetterRuins - Vintage Story Mod DB</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/web/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/web/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/web/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/web/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/web/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <link nonce="" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" type="text/css">
+
+    <link nonce="" href="/web/css/chosen.min.css" rel="stylesheet" type="text/css">
+    <link nonce="" href="/web/css/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+    <link nonce="" href="/web/js/chosen/chosen.min.css" rel="stylesheet" type="text/css">
+    <link nonce="" href="/web/css/datepicker.min.css" rel="stylesheet" type="text/css">
+    <link nonce="" href="/web/js/tinymce/plugins/spoiler/css/spoiler.css?v=2" rel="stylesheet" type="text/css">
+
+    <link nonce="" href="/web/js/tinymce/skins/ui/oxide/skin.mobile.min.css" as="style">
+    <link nonce="" href="/web/js/tinymce/skins/ui/oxide/content.mobile.min.css" as="style">
+    <link nonce="" href="/web/js/tinymce/skins/ui/oxide/fonts/tinymce-mobile.woff?8x92w3" as="font">
+
+    <link nonce="" href="/web/js/tinymce/skins/ui/oxide/skin.min.css" as="style">
+    <link nonce="" href="/web/js/tinymce/skins/ui/oxide/content.min.css" as="style">
+    <link nonce="" href="/web/css/editor_content.css?ver=4" as="style">
+
+    <link nonce="" href="/web/css/style.css?version=101" rel="stylesheet" type="text/css">
+
+    <link rel="dns-prefetch" href="https://moddbcdn.vintagestory.at">
+    <script nonce="" type="text/javascript" src="/web/js/jquery-1.11.1.min.js"></script>
+    <script nonce="" type="text/javascript" src="/web/js/chosen/chosen.jquery.min.js?v=3"></script>
+    <style type="text/css">
+        .spoiler {
+            border: 1px solid gray;
+            background-color: #f5f5f599;
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .spoiler-toggle::before {
+            content: "►";
+            vertical-align: bottom;
+        }
+
+        .spoiler-toggle.expanded::before {
+            content: "▼";
+            vertical-align: bottom;
+        }
+
+        .spoiler-toggle {
+            font-weight: bold;
+            padding: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .spoiler-text {
+            padding: 5px;
+        }        
+        
+    </style>
+</head>
+<body>
+<div style="border-radius: 25px; background: linear-gradient(to bottom,#994A00, #442900); border: darkorange 2px; padding: 5px; margin: 0 auto 20px auto;">
+    <h1 style="text-align: center; color: #fde6a0; text-shadow: 3px 3px 5px black;">Brass Brewery's Better Nutrition</h1>
+    <p>&nbsp;</p>
+    <div style="color: #fde6a0; text-align: center; border-top: 1px solid #ff7b0077; border-bottom: 1px solid #ff7b0077; font-style: italic; max-width: 90%; align-content: center; margin: 0 auto;">
+        <p style="text-size-adjust: 80%; padding-top: 15px; padding-bottom: 15px;">"Remember that you don&rsquo;t have to eat a perfect diet to be healthy. You will not suddenly get a nutrient deficiency, or gain weight from one snack, one meal, or one day of eating. It&rsquo;s what you eat consistently over time that matters. Progress, not perfection, is what counts."</p>
+    </div>
+    <p style="margin: 0 auto; padding-top: 5px; max-width: 95%; text-align: center; color: #fde6a0;">&nbsp;</p>
+    <p style="margin: 0 auto; padding-top: 5px; max-width: 95%; text-align: center; color: #fde6a0;">Brass Brewery's Hunger overhaul focuses on rewarding the player as they progress cooking technology with passive buffs over the long term course of the game while granting the player with diegetic feedback to their nutrition and food choices. All features are configurable and built in mind to allow users to configure the expierence to fit your playthrough.&nbsp;</p>
+    <br />
+    <div class="spoiler" style="border-radius: 6px; padding: 3px;">
+        <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><img src="https://wiki.vintagestory.at/images/d/d8/Cooked_meats.gif" alt="image" width="28" height="28" /> <span style="font-size: 24px; color: #613a00; text-shadow: 2px 2px 3px gray;"> Features </span><img src="https://wiki.vintagestory.at/images/d/d8/Cooked_meats.gif" alt="image" width="28" height="28" /></div>
+        <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">
+            <ul style="list-style-type: square;">
+                <li><span style="color: #000000;"><strong>Nutritional Buffs - </strong>Grants an array of passive buffs for boosting nutrition to multiple stats including&nbsp;Mining Speed,&nbsp;Melee Damage, Hunger Rate, Movement Speed.&nbsp;The base game Health modifier can be adjusted. A base modifier is available to adjust the natural starting stats to allow for a harder primitive age. See the table below for the default values.<em> <strong>(See table for defaults)</strong></em></span></li>
+                <li><span style="color: #000000;"><strong>Slow Starvation </strong>- Once below a percentage of satiety, start recieving passive debuffs while gaining reduced hunger that reduces as your hunger drops. <strong><em>(Default: 50% satiety, see table for all other defaults)</em></strong></span></li>
+                <li><span style="color: #000000;"><strong>Passive Regeneration - </strong>Maintaining high saturation boost your natural regeneration scaling based upon your maximum health. Sitting while at high regeneration makes it even stronger.<em> <strong>(Default when above 70% satiety, 0.25% HP/second or 1.25%HP/second when sitting)</strong></em></span></li>
+                <li><span style="color: #000000;"><strong>Max Satiety Adjuster</strong> - Can change the max satiety of the player. <em><strong>(Default: 500)</strong></em></span></li>
+                <li><span style="color: #000000;"><strong>Offhand Food Penalty</strong><em> -&nbsp;</em>Vanilla penalizes the player with +20% hungerrate when holding an item in your offhand, this mod allow you to toggle this on and off. <em><strong>(Default:&nbsp;Offhand Hunger Penalty: false)</strong></em></span></li>
+                <li><span style="color: #000000;"><strong>Starvation Damage</strong> - Allows changing the default starvation damage in vanilla, allowing the ability to remove the poultice starvation cheese or prevent slow long starvation deaths. <em><strong>(Default: &nbsp;2.5 damage.&nbsp; Vanilla is 0.125 damage)</strong></em></span></li>
+                <li><span style="color: #000000;"><strong>Fully Configurable -&nbsp;</strong>Everything is configurable to allow it to be tuned to your desired playstyle</span></li>
+                <li><span style="color: #000000;"><strong>Modded Support&nbsp;</strong>- Should have few to no conflicting mods, and has built in enhancments with XSkills and Hydrate or Diedrate.</span></li>
+            </ul>
+            <p>&nbsp;</p>
+            <div class="spoiler" style="border-radius: 6px; padding: 3px;">
+                <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><span style="color: #000000;">Default Nutrition Stats Breakdown</span></div>
+                <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">
+                    <p><strong>Default Values</strong></p>
+                    <table style="border-collapse: collapse; width: 37.5986%; height: 200px;" border="1">
+                        <tbody>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">&nbsp;</td>
+                            <td style="width: 5.42915%; height: 20px;"><strong>Speed</strong></td>
+                            <td style="width: 3.54825%; height: 20px;"><strong>Hunger</strong></td>
+                            <td style="width: 4.79905%; height: 20px;"><strong>Mining</strong></td>
+                            <td style="width: 4.25446%; height: 20px;"><strong>Melee</strong></td>
+                            <td style="width: 4.58546%; height: 20px;"><strong>Health<span style="color: #e74c3c;">*</span></strong></td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Fruit</td>
+                            <td style="width: 5.42915%; height: 20px;">+10%</td>
+                            <td style="width: 3.54825%; height: 20px;">-5%</td>
+                            <td style="width: 4.79905%; height: 20px;">+5%</td>
+                            <td style="width: 4.25446%; height: 20px;">+7.5%</td>
+                            <td style="width: 4.58546%; height: 20px;">+3.5</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Grain</td>
+                            <td style="width: 5.42915%; height: 20px;">+5%</td>
+                            <td style="width: 3.54825%; height: 20px;">-7.5%</td>
+                            <td style="width: 4.79905%; height: 20px;">+15%</td>
+                            <td style="width: 4.25446%; height: 20px;">+5%</td>
+                            <td style="width: 4.58546%; height: 20px;">+2</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Vegetable</td>
+                            <td style="width: 5.42915%; height: 20px;">+2.5%</td>
+                            <td style="width: 3.54825%; height: 20px;">-7.5%</td>
+                            <td style="width: 4.79905%; height: 20px;">+10%</td>
+                            <td style="width: 4.25446%; height: 20px;">+5%</td>
+                            <td style="width: 4.58546%; height: 20px;">+4</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Protein</td>
+                            <td style="width: 5.42915%; height: 20px;">+5%</td>
+                            <td style="width: 3.54825%; height: 20px;">-5%</td>
+                            <td style="width: 4.79905%; height: 20px;">+10%</td>
+                            <td style="width: 4.25446%; height: 20px;">+15%</td>
+                            <td style="width: 4.58546%; height: 20px;">
+                                <p>+2</p>
+                            </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Dairy</td>
+                            <td style="width: 5.42915%; height: 20px;">+2.5%</td>
+                            <td style="width: 3.54825%; height: 20px;">-10%</td>
+                            <td style="width: 4.79905%; height: 20px;">+5%</td>
+                            <td style="width: 4.25446%; height: 20px;">+7.5%</td>
+                            <td style="width: 4.58546%; height: 20px;">+3.5</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Base</td>
+                            <td style="width: 5.42915%; height: 20px;">-10%</td>
+                            <td style="width: 3.54825%; height: 20px;">10%</td>
+                            <td style="width: 4.79905%; height: 20px;">-15%</td>
+                            <td style="width: 4.25446%; height: 20px;">-15%</td>
+                            <td style="width: 4.58546%; height: 20px;">0</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Starvation</td>
+                            <td style="width: 5.42915%; height: 20px;">-20%</td>
+                            <td style="width: 3.54825%; height: 20px;">-25%</td>
+                            <td style="width: 4.79905%; height: 20px;">-30%</td>
+                            <td style="width: 4.25446%; height: 20px;">-30%</td>
+                            <td style="width: 4.58546%; height: 20px;">30</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p><strong>Totals Averages</strong></p>
+                    <table style="border-collapse: collapse; width: 37.5218%; height: 99px;" border="1">
+                        <tbody>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">&nbsp;</td>
+                            <td style="width: 5.42915%; height: 20px;"><strong>Speed</strong></td>
+                            <td style="width: 3.54825%; height: 20px;"><strong>Hunger</strong></td>
+                            <td style="width: 4.79905%; height: 20px;"><strong>Mining</strong></td>
+                            <td style="width: 4.25446%; height: 20px;"><strong>Melee</strong></td>
+                            <td style="width: 4.58546%; height: 20px;"><strong>Health<span style="color: #e74c3c;">*</span></strong></td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Starvation (0% satiety)</td>
+                            <td style="width: 5.42915%; height: 20px;">80%</td>
+                            <td style="width: 3.54825%; height: 20px;">75%</td>
+                            <td style="width: 4.79905%; height: 20px;">70%</td>
+                            <td style="width: 4.25446%; height: 20px;">70%</td>
+                            <td style="width: 4.58546%; height: 20px;">7.5</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Max Stats (+50% satiety)</td>
+                            <td style="width: 5.42915%; height: 20px;">115%</td>
+                            <td style="width: 3.54825%; height: 20px;">75%</td>
+                            <td style="width: 4.79905%; height: 20px;">130%</td>
+                            <td style="width: 4.25446%; height: 20px;">125%</td>
+                            <td style="width: 4.58546%; height: 20px;">30</td>
+                        </tr>
+                        <tr style="height: 20px;">
+                            <td style="width: 18.2478%; height: 20px;">Max Stats with Starvation (0% satiety)</td>
+                            <td style="width: 5.42915%; height: 20px;">95%</td>
+                            <td style="width: 3.54825%; height: 20px;">50%</td>
+                            <td style="width: 4.79905%; height: 20px;">100%</td>
+                            <td style="width: 4.25446%; height: 20px;">95%</td>
+                            <td style="width: 4.58546%; height: 20px;">22.5</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <p><strong><sup><span style="color: #e74c3c;">*This assumes health is a standard 15 starting HP.</span></sup></strong></p>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="spoiler" style="border-radius: 10px; padding: 3px;">
+        <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><img src="https://wiki.vintagestory.at/images/e/e8/All_currants_blueberry.gif" alt="image" width="28" height="28" /> <span style="font-size: 24px; color: #613a00; text-shadow: 2px 2px 3px gray;"> Configuration</span> <img src="https://wiki.vintagestory.at/images/e/e8/All_currants_blueberry.gif" alt="image" width="28" height="28" /></div>
+        <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">&nbsp;
+            <div style="border-radius: 3px; background-color: #ffef0030; border: inset 1px #ffef0060; border-left: solid 4px #ffef00; width: 50%; max-width: 80%;">
+                <h2 style="padding: 0px; margin-top: 3px; margin-left: 10px; margin-bottom: 1px;">Gameplay Balance Issues</h2>
+                <p style="margin-left: 7px; padding: 0px; margin-top: 1px; margin-bottom: 3px;">The default configuration may feel too hard or easy based upon your style of gameplay. Please review the <em>BrassBrewery-BetterNutrition.json</em> config. Feel free to share configs in the comments if you have any suggested tweaks.</p>
+            </div>
+            <h3 style="color: red;"><strong>Configuration Guide should be updated soon to go over in detail all configuration values</strong></h3>
+            <div class="spoiler" style="border-radius: 6px; padding: 3px;">
+                <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><span style="color: #000000;">Default Config</span></div>
+                <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">
+<pre class="language-markup"><code>{
+  "Nutrition": {
+    "Enable": true,
+    "UpdateFrequency": 3.0,
+    "UpdateThreshold": 0.02,
+    "WalkSpeed": {
+      "Enable": true,
+      "Fruit": 0.1,
+      "Grain": 0.05,
+      "Vegetable": 0.025,
+      "Protein": 0.05,
+      "Dairy": 0.025,
+      "Base": -0.1,
+      "Starvation": -0.2
+    },
+    "Health": {
+      "Enable": true,
+      "Fruit": 3.0,
+      "Grain": 2.0,
+      "Vegetable": 4.0,
+      "Protein": 2.0,
+      "Dairy": 3.0,
+      "Base": 0.0,
+      "Starvation": -7.5
+    },
+    "Hunger": {
+      "Enable": true,
+      "Fruit": -0.05,
+      "Grain": -0.075,
+      "Vegetable": -0.075,
+      "Protein": -0.05,
+      "Dairy": -0.1,
+      "Base": 0.1,
+      "Starvation": -0.25
+    },
+    "MeleeDamage": {
+      "Enable": true,
+      "Fruit": 0.075,
+      "Grain": 0.05,	
+      "Vegetable": 0.05,
+      "Protein": 0.15,
+      "Dairy": 0.075,
+      "Base": -0.15,
+      "Starvation": -0.3
+    },
+    "MiningSpeed": {
+      "Enable": true,
+      "Fruit": 0.05,
+      "Grain": 0.15,
+      "Vegetable": 0.1,
+      "Protein": 0.1,
+      "Dairy": 0.05,
+      "Base": -0.15,
+      "Starvation": -0.33
+    },
+    "Starvation": {
+      "Enable": true,
+      "MinimumFoodToStarve": 0.5
+    }
+  },
+  "Regeneration": {
+    "Enable": true,
+    "MinimumSatiety": 0.75,
+    "RegenerationRate": 0.0025,
+    "RestingRegenerationRate": 0.025,
+    "TickRate": 2.0
+  },
+  "Misc": {
+    "OffHandHungerPenalty": false,
+    "AdditionalSatietyBonus": 500.0,
+    "VanillaStarvationDamage": 2.5
+  },
+  "Integration": {
+    "XSkills": {
+      "Enable": false,
+      "XSkillMultiplier": {
+        "Enable": true,
+        "Fruit": 0.06,
+        "Grain": 0.06,
+        "Vegetable": 0.06,
+        "Protein": 0.06,
+        "Dairy": 0.06
+      }
+    },
+    "HydrateOrDiedrate": {
+      "Enable": true,
+      "ThirstRate": {
+        "Enable": true,
+        "Fruit": 0.03,
+        "Grain": 0.03,
+        "Vegetable": 0.03,
+        "Protein": 0.03,
+        "Dairy": 0.03
+      },
+      "CoolingMultiplier": {
+        "Enable": true,
+        "Fruit": 0.03,
+        "Grain": 0.03,
+        "Vegetable": 0.03,
+        "Protein": 0.03,
+        "Dairy": 0.03
+      }
+    }
+  }
+}</code></pre>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+        </div>
+    </div>
+    <div class="spoiler" style="border-radius: 10px; padding: 3px;">
+        <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><img src="https://wiki.vintagestory.at/images/8/86/All_breads.gif" alt="image" width="28" height="28" /> <span style="font-size: 24px; color: #613a00; text-shadow: 2px 2px 3px gray;">Mod Compatibility</span> <img src="https://wiki.vintagestory.at/images/8/86/All_breads.gif" alt="image" width="28" height="28" /></div>
+        <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">&nbsp;
+            <div style="border-radius: 3px; background-color: #ff000030; border: inset 1px #ff000050; border-left: solid 4px #ff3300; width: 50%; max-width: 85%;">
+                <h2 style="padding: 0px; margin-top: 3px; margin-left: 10px; margin-bottom: 1px;">Incompatibilities Warning</h2>
+                <p style="margin-left: 7px; padding: 0px; margin-top: 1px; margin-bottom: 3px;">While there is no known incompatibilities at the current moment, please take caution and make backups of your world before adding new mods to your world.</p>
+            </div>
+            <h2>Native Supported Mods</h2>
+            <ul>
+                <li><span style="color: #ffb200;"><strong><a style="color: #ffb200;" href="https://mods.vintagestory.at/show/mod/44074" target="_blank" rel="noopener">XSkills Fork</a></strong></span> - Option to grants xp boost for all nutritional stats. <strong><em>(Default: 3% per max nutrition type, up to 15%)</em></strong></li>
+                <li><span style="color: #f29d12;"><strong><a style="color: #f29d12;" href="https://mods.vintagestory.at/hydrateordiedrate" target="_blank" rel="noopener"><span style="color: #ffb200;">Hydrate Or Diedrate</span></a> </strong></span>- Options to grants bonus cooling modifier and thirst rate multiplier for all nutritional stats <strong>(Default: 3% per max nutrion for both cooling modifier and thirst rate multiplier, to a total of 15% cooling modifier and -15% thirst rate)</strong></li>
+            </ul>
+            <h2>Recommend Mods</h2>
+            <ul>
+                <li><strong><a href="https://mods.vintagestory.at/expandedfoods" target="_blank" rel="noopener"><span style="color: #ffb200;">Expanded Foods</span></a></strong> - Great for adding in new foods to help reaching high nutrition rates</li>
+                <li><span style="color: #ffb200;"><strong><a style="color: #ffb200;" href="https://mods.vintagestory.at/show/mod/34545" target="_blank" rel="noopener">Adventurer's Walking Stick</a></strong></span> - Great tool for getting more out of your food with tools to reduce your food drain long distance.&nbsp;</li>
+            </ul>
+        </div>
+    </div>
+    <div class="spoiler" style="border-radius: 10px; padding: 3px;">
+        <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><img src="https://wiki.vintagestory.at/images/1/18/Other_vegetables.gif" alt="image" width="28" height="28" /> <span style="font-size: 24px; color: #613a00; text-shadow: 2px 2px 3px gray;">Misc</span> <img src="https://wiki.vintagestory.at/images/1/18/Other_vegetables.gif" alt="image" width="28" height="28" /></div>
+        <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">
+            <h2>Requesting Enhancements &amp; Features</h2>
+            <p>Please comment below if you have any requested features or enhancments, and I will try to add them in the future as long as it fits with the mod</p>
+            <h2>Reporting Bugs</h2>
+            <p>Please comment below with your bugs. If possible, please including information on how you created the bug, your mod list, and any errors seen within your error log, and I will try to address as soon as possible</p>
+            <h2>List of Server with the mod:</h2>
+            <p>None - feel free to comment to get your server added to the list</p>
+        </div>
+    </div>
+    <div class="spoiler" style="border-radius: 10px; padding: 3px;">
+        <div class="spoiler-toggle" style="border-radius: 5px; padding: 3px;"><img src="https://wiki.vintagestory.at/images/2/27/All_mushrooms.gif" alt="image" width="28" height="28" /> <span style="font-size: 24px; color: #613a00; text-shadow: 2px 2px 3px gray;">Credits</span> <img src="https://wiki.vintagestory.at/images/2/27/All_mushrooms.gif" alt="image" width="28" height="28" /></div>
+        <div class="spoiler-text" style="border-radius: 5px; padding: 3px;">
+            <p><strong><a href="https://oculuce.github.io/">Oculuce</a>-&nbsp;</strong>Creating mod artwork and being a longterm supporter of my endevours&nbsp;</p>
+            <p><strong><a href="https://wiki.vintagestory.at/">Vintage Story Wiki</a></strong> - Image assets and overall useful resources&nbsp;</p>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+</body>
+</html>

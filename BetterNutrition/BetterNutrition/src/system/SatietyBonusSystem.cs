@@ -6,14 +6,10 @@ using Vintagestory.GameContent;
 
 namespace BetterNutrition;
 
-public class UpdateBonusSatiety
+public class SatietyBonusSystem
 {
     private static readonly BetterNutritionConfigData _config = BetterNutritionConfig.Config;
-
-    public static void OnPlayerCreate(IServerPlayer player)
-    {
-        player.Entity.Attributes.SetAttribute("BrassBreweryBetterNutritionPatch1_0_4",new BoolAttribute(true));
-    }
+    
     public static void OnPlayerJoin(IServerPlayer player)
     {
         EntityBehaviorHunger hunger = player.Entity.GetBehavior<EntityBehaviorHunger>();
@@ -21,20 +17,12 @@ public class UpdateBonusSatiety
         {
             return;
         }
-
-        bool legacyPatchApplied = false;
-        if (_config.patchSaturationOnLogin && player.Entity.Attributes.HasAttribute("BrassBreweryBetterNutritionPatch1_0_4"))
-        {
-            legacyPatchApplied = true;
-            hunger.MaxSaturation = hunger.MaxSaturation - _config.AdditionalSatietyBonus;
-            player.Entity.Attributes.SetAttribute("BrassBreweryBetterNutritionPatch1_0_4",new BoolAttribute(true));
-        }
         float bonusSaturation = hunger.entity.Attributes.GetFloat("BrassBreweryBetterNutritionBonusSatiety");
-        if (bonusSaturation != _config.AdditionalSatietyBonus || legacyPatchApplied)
+        if (bonusSaturation != _config.Misc.AdditionalSatietyBonus)
         {
             
             float oldSaturation = hunger.MaxSaturation;
-            hunger.MaxSaturation = hunger.MaxSaturation - bonusSaturation + _config.AdditionalSatietyBonus;
+            hunger.MaxSaturation = hunger.MaxSaturation - bonusSaturation + _config.Misc.AdditionalSatietyBonus;
             if (hunger.Saturation >= hunger.MaxSaturation)
             {
                 hunger.Saturation = hunger.MaxSaturation;
@@ -47,7 +35,7 @@ public class UpdateBonusSatiety
             hunger.VegetableLevel = Math.Clamp(hunger.VegetableLevel * saturationChangeCoefficent, 0f, hunger.MaxSaturation);
             hunger.ProteinLevel = Math.Clamp(hunger.ProteinLevel * saturationChangeCoefficent, 0f, hunger.MaxSaturation);
             hunger.DairyLevel = Math.Clamp(hunger.DairyLevel * saturationChangeCoefficent, 0f, hunger.MaxSaturation);
-            hunger.entity.Attributes.SetFloat("BrassBreweryBetterNutritionBonusSatiety", _config.AdditionalSatietyBonus);
+            hunger.entity.Attributes.SetFloat("BrassBreweryBetterNutritionBonusSatiety", _config.Misc.AdditionalSatietyBonus);
             hunger.UpdateNutrientHealthBoost();
         }
     }
