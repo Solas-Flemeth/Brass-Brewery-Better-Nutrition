@@ -12,13 +12,13 @@ public class RegenerationSettings
     [Description("What is the mininmum amount of satiey required to have regeneration")]
     public float MinimumSatiety { get; set; } = 0.70f;
 
-    [DisplayFormat(DataFormatString = "P"), Range(0.0f, 1.0f), DefaultValue(0.0025f)]
+    [DisplayFormat(DataFormatString = "P"), Range(0.0f, 1.0f), DefaultValue(0.0015f)]
     [Description("What percentage of health is regenerated a heal tick")]
-    public float RegenerationRate { get; set; } = 0.0025f;
+    public float RegenerationRate { get; set; } = 0.0015f;
     
-    [Range(0f, 1f), DefaultValue(0.0125f)]
+    [Range(0f, 1f), DefaultValue(0.0075f)]
     [Description("What percentage of health should be regenerated a heal tick if sitting")]
-    public float RestingRegenerationRate { get; set; } = 0.0125f;
+    public float RestingRegenerationRate { get; set; } = 0.0075f;
     
     [Range(0.2f,10f), DefaultValue(1.0)]
     [Description("How often should the player have bonus regeneration in seconds")]

@@ -24,7 +24,11 @@ public class NutritionSystem(ICoreServerAPI api)
 
     public static void UpdateNutritionStats(IServerPlayer serverPlayer,bool force = false)
     {
-        EntityPlayer player = serverPlayer.Entity;
+        EntityPlayer? player = serverPlayer.Entity;
+        if (player == null)
+        {
+            return;
+        }
         float fruitPercentage = player.Attributes.GetFloat("betterNutrition-fruit");
         float grainPercentage = player.Attributes.GetFloat("betterNutrition-grain");
         float vegetablePercentage = player.Attributes.GetFloat("betterNutrition-vegetable");
@@ -47,7 +51,6 @@ public class NutritionSystem(ICoreServerAPI api)
                 return;   //exit method if there is nothing at update threshold
             }
         }
-        BetterNutritionModSystem.Log("Updating nutrition Stats");
         //update Vanilla stats
         float starvationEffectiveness =  nutrition.Starvation.Enable && hungerPercentage < nutrition.Starvation.MinimumFoodToStarve ? 1f - hungerPercentage/nutrition.Starvation.MinimumFoodToStarve : 0.0f;
         

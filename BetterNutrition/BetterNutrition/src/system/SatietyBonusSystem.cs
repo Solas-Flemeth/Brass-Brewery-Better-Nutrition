@@ -12,7 +12,7 @@ public class SatietyBonusSystem
     
     public static void OnPlayerJoin(IServerPlayer player)
     {
-        EntityBehaviorHunger hunger = player.Entity.GetBehavior<EntityBehaviorHunger>();
+        EntityBehaviorHunger? hunger = player.Entity?.GetBehavior<EntityBehaviorHunger>();
         if (hunger == null)
         {
             return;
@@ -39,4 +39,4 @@ public class SatietyBonusSystem
             hunger.UpdateNutrientHealthBoost();
         }
     }
-}
+}   
