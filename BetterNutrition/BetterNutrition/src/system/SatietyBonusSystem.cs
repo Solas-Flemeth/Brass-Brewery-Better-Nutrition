@@ -1,5 +1,6 @@
 ﻿using System;
 using Vintagestory;
+using Vintagestory.API.Common;
 using Vintagestory.API.Datastructures;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
@@ -10,9 +11,14 @@ public class SatietyBonusSystem
 {
     private static readonly BetterNutritionConfigData _config = BetterNutritionConfig.Config;
     
-    public static void OnPlayerJoin(IServerPlayer player)
+    public static void OnPlayerJoin(IServerPlayer serverPlayer)
     {
-        EntityBehaviorHunger? hunger = player.Entity?.GetBehavior<EntityBehaviorHunger>();
+        EntityPlayer? player = serverPlayer.Entity;
+        if (player.SidedProperties?.Behaviors == null)
+        {
+            return; //ensure getBehavior doesnt break
+        }
+        EntityBehaviorHunger? hunger = player?.GetBehavior<EntityBehaviorHunger>(); 
         if (hunger == null)
         {
             return;

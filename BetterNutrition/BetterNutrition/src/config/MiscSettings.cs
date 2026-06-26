@@ -12,7 +12,7 @@ public class MiscSettings
     [Description("How much satiety is added to the games base satiety. This is compatible with XSkill's Huge Stomach.")]
     public float AdditionalSatietyBonus { get; set; } = 500f;
 
-    [Range(0.0f, 20f), DefaultValue(2.5f)] 
+    [Range(0.0f, 20f), DefaultValue(1.0f)] 
     [Description("Override the damage of the vanilla starvation system. Great for saving your ears from the annoying starvation horn sounds. Vanilla has a default value of '0.125'.")]
-    public float VanillaStarvationDamage { get; set; } = 2.5f;
+    public float VanillaStarvationDamage { get; set; } = 1.0f;
 }

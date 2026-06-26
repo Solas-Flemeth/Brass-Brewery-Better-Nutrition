@@ -14,12 +14,11 @@ public class BetterNutritionModSystem : ModSystem
     public override void Start(ICoreAPI api)
     {
         Instance = this;
-        Log("Begin Loading");
-        //load config
         if (!BetterNutritionConfig.IsLoaded)
         {
             BetterNutritionConfig.LoadConfig(Mod, api);
         }
+        Log("Begin Loading");
         //harmony patching
         _harmony = new Harmony(Mod.Info.ModID);
         ApplyPatches(api);
@@ -33,14 +32,10 @@ public class BetterNutritionModSystem : ModSystem
 
     public override void StartServerSide(ICoreServerAPI api)
     {
-        if (!BetterNutritionConfig.IsLoaded)
-        {
-            BetterNutritionConfig.LoadConfig(Mod, api);
-        }
         //Load Systems and listeners
         if (BetterNutritionConfig.Config.Nutrition.Enable)
         {
-            Log("Enabling Regeneration System");
+            Log("Enabling Nutrition System");
             NutritionSystem nutritionSystem = new NutritionSystem(api);
             api.Event.RegisterGameTickListener(nutritionSystem.PlayerNutritionUpdateCheck, (int) (BetterNutritionConfig.Config.Nutrition.UpdateFrequency*1000f));
         }
@@ -59,7 +54,7 @@ public class BetterNutritionModSystem : ModSystem
 
     public override void StartClientSide(ICoreClientAPI api) 
     {
-        
+
     }
     public override void Dispose()
     {
@@ -72,6 +67,13 @@ public class BetterNutritionModSystem : ModSystem
         _harmony.PatchCategory("brassbrewerybetternutrition.base");
         IntegrationController.StartXSkillsIntegration(api);
         IntegrationController.StartHydrateDydrate(api);
+        if (api.Side == EnumAppSide.Client)
+        {
+            if (BetterNutritionConfig.Config.Client.Enable)
+            {
+               _harmony.PatchCategory("brassbrewerybetternutrition.client");
+            }
+        }
         //future mod patches here
     }
 

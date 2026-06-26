@@ -22,6 +22,7 @@ public class NutritionSettings
     public MeleeDamageSettings MeleeDamage { get; set; } = new MeleeDamageSettings();
     public MiningSpeedSettings MiningSpeed { get; set; } = new MiningSpeedSettings();
     public StarvationSettings Starvation { get; set; } = new StarvationSettings();
+    
 }
 
 //sub classes

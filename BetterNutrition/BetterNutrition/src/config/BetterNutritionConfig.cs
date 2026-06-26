@@ -1,5 +1,6 @@
 ﻿using System;
 using Vintagestory.API.Common;
+using Vintagestory.Client.NoObf;
 
 namespace BetterNutrition;
 
@@ -9,6 +10,7 @@ public class BetterNutritionConfigData
     public RegenerationSettings Regeneration { get; set; } = new RegenerationSettings();
     public MiscSettings Misc { get; set; } = new MiscSettings();
     public IntegrationSettings Integration { get; set; } = new IntegrationSettings();
+    public ClientSettings Client { get; set; } = new ClientSettings();
 }
 
 public class BetterNutritionConfig
@@ -38,4 +40,5 @@ public class BetterNutritionConfig
             IsLoaded = true;
         }
     }
+
 }
